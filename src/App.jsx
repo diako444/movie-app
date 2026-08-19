@@ -6,6 +6,8 @@ import Hero from './components/Hero';
 import MovieGrid from './components/MovieGrid/MovieGrid';
 import { movies } from './data/movies';
 import MovieDetailsModal from './components/MovieDetailsModal/MovieDetailsModal';
+import WatchlistSection from './components/WatchlistSection/WatchlistSection';
+
 
 import './App.css';
 
@@ -94,7 +96,14 @@ const handleToggleWatchlist = (movie) => {
 
       <main>
         <Hero />
-
+        <WatchlistSection
+        movies={watchlist}
+        watchlist={watchlist}
+        onToggleWatchlist={handleToggleWatchlist}
+        />
+          <section className="movies-section">
+          <h2>All Movies</h2>
+          </section>
         <MovieGrid
           movies={currentMovies}
           onSelectMovie={setSelectedMovie}

@@ -1,0 +1,68 @@
+.watchlist-section {
+  margin: 2rem 0;
+  padding: 1.25rem;
+  border: 1px solid rgba(229, 9, 20, 0.35);
+  border-radius: 1rem;
+  background:
+    linear-gradient(
+      135deg,
+      rgba(229, 9, 20, 0.14),
+      rgba(18, 18, 18, 0.88) 50%,
+      rgba(18, 18, 18, 0.96)
+    );
+  box-shadow: 0 0.75rem 2rem rgba(0, 0, 0, 0.2);
+}
+
+.watchlist-section__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.watchlist-section__eyebrow {
+  margin: 0 0 0.35rem;
+  color: #e50914;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+}
+
+.watchlist-section__title {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin: 0;
+  color: #ffffff;
+  font-size: clamp(1.25rem, 3vw, 1.7rem);
+}
+
+.watchlist-section__title span {
+  color: #e50914;
+  font-size: 1.1em;
+}
+
+.watchlist-section__count {
+  flex-shrink: 0;
+  padding: 0.4rem 0.7rem;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.25);
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+@media (max-width: 480px) {
+  .watchlist-section {
+    margin: 1.5rem 0;
+    padding: 1rem;
+  }
+
+  .watchlist-section__header {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+}
