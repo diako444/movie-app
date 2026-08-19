@@ -1,0 +1,21 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #1f2937;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.navbar-logo {
+  color: #f87171;
+  font-size: 1.5rem;
+}
+
+.navbar-search input {
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  border: 1px solid #374151;
+  background-color: #111827;
+  color: #ffffff;
+}
