@@ -1,7 +1,15 @@
 import './MovieCard.css';
 
-function MovieCard({ movie, onSelectMovie }) {
+function MovieCard({
+  movie,
+  onSelectMovie,
+  watchlist,
+  onToggleWatchlist,
+}) {
   if (!movie) return null;
+  const isFavorite = watchlist?.some(
+  (item) => item.id === movie.id
+);
 
   const {
     title,
@@ -44,6 +52,28 @@ function MovieCard({ movie, onSelectMovie }) {
             <span>{genre}</span>
           </div>
         </div>
+      </button>
+       <button
+        className={`movie-card__watchlist ${
+          isFavorite ? 'movie-card__watchlist--active' : ''
+        }`}
+        type="button"
+        onClick={(event) => {
+          event.stopPropagation();
+          onToggleWatchlist(movie);
+        }}
+        title={
+          isFavorite
+            ? 'Remove from Watchlist'
+            : 'Add to Watchlist'
+        }
+        aria-label={
+          isFavorite
+            ? `Remove ${title} from watchlist`
+            : `Add ${title} to watchlist`
+        }
+      >
+        {isFavorite ? '❤️' : '🤍'}
       </button>
     </article>
   );

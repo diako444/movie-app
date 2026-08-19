@@ -1,4 +1,5 @@
-import { useState, useMemo } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
+
 
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
@@ -13,7 +14,32 @@ const MOVIES_PER_PAGE = 8;
 function App() {
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
-const [selectedMovie, setSelectedMovie] = useState(null);
+  const [selectedMovie, setSelectedMovie] = useState(null);
+
+  // 1. Initialize from localStorage or empty array
+const [watchlist, setWatchlist] = useState(() => {
+  const saved = localStorage.getItem('cinemax_watchlist');
+  return saved ? JSON.parse(saved) : [];
+});
+
+// 2. Sync to localStorage whenever watchlist changes
+useEffect(() => {
+  localStorage.setItem('cinemax_watchlist', JSON.stringify(watchlist));
+}, [watchlist]);
+
+// 3. Helper to toggle a movie in/out
+const handleToggleWatchlist = (movie) => {
+  setWatchlist((prev) => {
+    const isAlreadyIn = prev.some((item) => item.id === movie.id);
+    if (isAlreadyIn) {
+      return prev.filter((item) => item.id !== movie.id);
+    } else {
+      return [...prev, movie];
+    }
+  });
+};
+
+
 
   const filteredMovies = useMemo(() => {
     const query = searchTerm.trim().toLowerCase();
@@ -70,9 +96,12 @@ const [selectedMovie, setSelectedMovie] = useState(null);
         <Hero />
 
         <MovieGrid
-        movies={currentMovies}
-        onSelectMovie={setSelectedMovie}
+          movies={currentMovies}
+          onSelectMovie={setSelectedMovie}
+          watchlist={watchlist}
+          onToggleWatchlist={handleToggleWatchlist}
         />
+
         <MovieDetailsModal
           movie={selectedMovie}
           onClose={() => setSelectedMovie(null)}
@@ -130,5 +159,8 @@ const [selectedMovie, setSelectedMovie] = useState(null);
     </div>
   );
 }
+
+
+
 
 export default App;
