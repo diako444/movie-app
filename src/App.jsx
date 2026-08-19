@@ -46,6 +46,7 @@ const handleToggleWatchlist = (movie) => {
   const filteredMovies = useMemo(() => {
     const query = searchTerm.trim().toLowerCase();
 
+    
     if (!query) {
       return movies;
     }
@@ -104,12 +105,15 @@ const handleToggleWatchlist = (movie) => {
           <section className="movies-section">
           <h2>All Movies</h2>
           </section>
-        <MovieGrid
-          movies={currentMovies}
-          onSelectMovie={setSelectedMovie}
-          watchlist={watchlist}
-          onToggleWatchlist={handleToggleWatchlist}
-        />
+     <MovieGrid
+       movies={currentMovies.filter(
+      (movie) => !watchlist.some((savedMovie) => savedMovie.id === movie.id)
+      )}
+      onSelectMovie={setSelectedMovie}
+      watchlist={watchlist}
+      onToggleWatchlist={handleToggleWatchlist}
+      />
+
 
         <MovieDetailsModal
           movie={selectedMovie}
