@@ -1,9 +1,10 @@
-import { useMemo, useState } from 'react';
+import { useState, useMemo } from 'react';
 
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import MovieGrid from './components/MovieGrid/MovieGrid';
 import { movies } from './data/movies';
+import MovieDetailsModal from './components/MovieDetailsModal/MovieDetailsModal';
 
 import './App.css';
 
@@ -12,6 +13,7 @@ const MOVIES_PER_PAGE = 8;
 function App() {
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
+const [selectedMovie, setSelectedMovie] = useState(null);
 
   const filteredMovies = useMemo(() => {
     const query = searchTerm.trim().toLowerCase();
@@ -67,7 +69,15 @@ function App() {
       <main>
         <Hero />
 
-        <MovieGrid movies={currentMovies} />
+        <MovieGrid
+        movies={currentMovies}
+        onSelectMovie={setSelectedMovie}
+        />
+        <MovieDetailsModal
+          movie={selectedMovie}
+          onClose={() => setSelectedMovie(null)}
+        />
+
 
         {totalPages > 1 && (
           <nav className="pagination" aria-label="Movie pages">

@@ -1,7 +1,8 @@
 import MovieCard from "../MovieCard/MovieCard";
 import "./MovieGrid.css";
 
-function MovieGrid({ movies }) {
+function MovieGrid({ movies, onSelectMovie }) {
+
   if (!movies || movies.length === 0) {
     return (
       <p className="movie-grid__empty">
@@ -19,7 +20,12 @@ function MovieGrid({ movies }) {
 
       <div className="movie-grid">
         {movies.map((movie) => (
-          <MovieCard key={movie.id} movie={movie} />
+          <MovieCard
+            key={movie.id}
+            movie={movie}
+            onSelectMovie={onSelectMovie}
+/>
+
         ))}
       </div>
     </section>
